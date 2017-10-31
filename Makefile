@@ -27,17 +27,22 @@ install: _add_key
 
 dev:
 	virtualenv $(VENV_DIR)
+	$(PIP_CMD) install --upgrade pip
 	$(PIP_CMD) install -r requirements.txt
 	$(PIP_CMD) install -r tests/requirements.txt
 	$(PIP_CMD) install -r dev_requirements.txt
 
-test:
+_flake8:
 	$(FLAKE8_CMD) salt-files
 	$(FLAKE8_CMD) tests
+
+_nose:
 	$(NOSE_CMD) $(NOSE_ARGS) $(TESTS_DIR)
 
+test: _flake8 _nose
+
 clean:
-	@echo "Nothing to do, yet..."
+	rm -rf $(VENV_DIR)
 
 help:
 	@echo "Choose from the following:"

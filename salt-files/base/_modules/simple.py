@@ -1,5 +1,5 @@
 """
-An example module.
+An simple example module.
 """
 # core python packages
 # third party packages
@@ -7,10 +7,8 @@ An example module.
 
 
 def foo():
-    output = __salt__['cmd.run']('echo "foo..."')
-    return output
+    return 'foo'
 
 
 if __name__ == '__main__':
-    __salt__ = dict()
     pass
