@@ -102,3 +102,6 @@ ENV/
 
 # vim temp file
 .*.swp
+
+# vagrant files
+.vagrant
