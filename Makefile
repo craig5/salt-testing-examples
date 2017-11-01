@@ -17,13 +17,15 @@ _add_key:
 	wget --quiet -O - $(SALT_GPG_KEY_URL) | sudo apt-key add -
 
 install: _add_key
+	@echo "Install salt..."
 	echo "$(SALT_XENIAL)" | sudo tee -a $(SALTSTACK_APT_FILE)
 	sudo apt-get update
 	sudo apt-get install --assume-yes python-virtualenv python-dev
 	sudo sudo apt-get --assume-yes install salt-master salt-minion
 	echo "master: localhost" | sudo tee -a /etc/salt/minion.d/master.conf
+	sudo cp config/local.conf /etc/salt/master.d
+	sudo service salt-master restart
 	sudo service salt-minion restart
-	@echo "Install salt..."
 
 dev:
 	virtualenv $(VENV_DIR)
